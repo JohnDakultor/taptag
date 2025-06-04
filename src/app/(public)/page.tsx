@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-neutral-800 px-6 py-12 space-y-32 text-white">
       <section className="text-center" data-aos="fade-down">
-        <h1 className="text-5xl font-extrabold mb-4 text-indigo-400">TapTag</h1>
+        <h1 className="text-5xl font-extrabold mb-4 text-yellow-500">TapTag</h1>
         <p className="text-lg text-neutral-300 max-w-xl mx-auto">
           Instantly share your digital portfolio with a tap. Built for professionals, creators, and anyone who wants to connect smarter.
         </p>
@@ -53,7 +53,7 @@ export default function Home() {
 
         {/* Add group so we can target image on parent hover */}
         <div className="relative z-10 group">
-          <h2 className="text-4xl font-bold text-center text-indigo-400 mb-4">
+          <h2 className="text-4xl font-bold text-center text-yellow-500 mb-4">
             What is NFC?
           </h2>
           <p className="text-neutral-300 text-lg text-center max-w-3xl mx-auto">
@@ -74,7 +74,7 @@ export default function Home() {
         className="relative bg-neutral-900 rounded-3xl shadow-inner py-12 px-8 max-w-5xl mx-auto space-y-6 overflow-hidden"
         data-aos="fade-up"
       >
-        <h2 className="text-4xl font-bold text-center text-indigo-400">
+        <h2 className="text-4xl font-bold text-center text-yellow-500">
           How Can Your Business Benefit?
         </h2>
         <ul className="list-disc list-inside text-neutral-300 text-lg space-y-4 max-w-3xl mx-auto">

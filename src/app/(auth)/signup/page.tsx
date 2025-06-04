@@ -30,7 +30,7 @@ export default function SignupPage() {
   return (
     <main className="min-h-screen bg-neutral-800 flex flex-col items-center justify-center px-6 py-12 text-white">
       <div className="max-w-md w-full bg-neutral-900 rounded-3xl shadow-lg p-10">
-        <h1 className="text-4xl font-extrabold mb-8 text-indigo-400 text-center">
+        <h1 className="text-4xl font-extrabold mb-8 text-yellow-500 text-center">
           Create Your Account
         </h1>
 
@@ -46,7 +46,7 @@ export default function SignupPage() {
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               placeholder="Your full name"
               required
-              className="w-full rounded-lg bg-neutral-700 border border-neutral-600 px-4 py-3 text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full rounded-lg bg-neutral-700 border border-neutral-600 px-4 py-3 text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             />
           </div>
 
@@ -61,7 +61,7 @@ export default function SignupPage() {
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               placeholder="you@example.com"
               required
-              className="w-full rounded-lg bg-neutral-700 border border-neutral-600 px-4 py-3 text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full rounded-lg bg-neutral-700 border border-neutral-600 px-4 py-3 text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             />
           </div>
 
@@ -76,7 +76,7 @@ export default function SignupPage() {
               onChange={(e) => setForm({ ...form, password: e.target.value })}
               placeholder="Your password"
               required
-              className="w-full rounded-lg bg-neutral-700 border border-neutral-600 px-4 py-3 text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full rounded-lg bg-neutral-700 border border-neutral-600 px-4 py-3 text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             />
           </div>
 
@@ -86,7 +86,7 @@ export default function SignupPage() {
 
           <Button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-500 text-white text-lg py-3 rounded-full shadow-xl transition duration-300"
+            className="w-full bg-yellow-500 hover:bg-yellow-700 text-white text-lg py-3 rounded-full shadow-xl transition duration-300"
           >
             Sign Up
           </Button>
@@ -96,7 +96,7 @@ export default function SignupPage() {
           Already have an account?{" "}
           <a
             href="/login"
-            className="text-indigo-400 hover:text-indigo-300 font-semibold underline"
+            className="text-yellow-500 hover:text-yellow-700 font-semibold underline"
           >
             Login
           </a>

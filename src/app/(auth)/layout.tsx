@@ -31,11 +31,10 @@ export default function AuthLayout({
         {/* Header */}
         <header className="w-full bg-neutral-900 border-b border-neutral-700">
           <nav className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-            <Link
+          <Link
               href="/"
-              className="flex items-center space-x-2 text-indigo-400 text-2xl font-bold"
+              className="flex items-center space-x-2 text-yellow-500 text-2xl font-bold"
             >
-              {/* Logo icon */}
               <img
                 src="https://cdn-icons-png.flaticon.com/512/906/906334.png"
                 alt="TapTag logo"
@@ -47,13 +46,13 @@ export default function AuthLayout({
             <div className="space-x-4">
               <Link
                 href="/login"
-                className="px-4 py-2 rounded-md bg-indigo-600 hover:bg-indigo-500 transition"
+                className="px-4 py-2 rounded-md bg-yellow-600 hover:bg-yellow-500 transition"
               >
                 Login
               </Link>
               <Link
                 href="/signup"
-                className="px-4 py-2 rounded-md border border-indigo-600 hover:bg-indigo-600 transition"
+                className="px-4 py-2 rounded-md border border-yellow-600 hover:bg-yellow-600 transition"
               >
                 Sign Up
               </Link>
@@ -69,13 +68,13 @@ export default function AuthLayout({
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center px-6 py-4 text-neutral-400 text-sm">
             <p>© {new Date().getFullYear()} TapTag. All rights reserved.</p>
             <div className="mt-2 md:mt-0 space-x-4">
-              <Link href="/" className="hover:text-indigo-400">
+              <Link href="/" className="hover:text-yellow-500">
                 Home
               </Link>
-              <Link href="/login" className="hover:text-indigo-400">
+              <Link href="/login" className="hover:text-yellow-500">
                 Login
               </Link>
-              <Link href="/signup" className="hover:text-indigo-400">
+              <Link href="/signup" className="hover:text-yellow-500">
                 Sign Up
               </Link>
             </div>

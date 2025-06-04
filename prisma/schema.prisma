@@ -20,4 +20,39 @@ model User {
   name      String?
   password  String
   createdAt DateTime @default(now())
+
+  links Link[] // <-- Add this line
+
+  portfolio Portfolio?
+}
+
+model Link {
+  id     String @id @default(cuid())
+  userId String
+  type   String // 'contact' | 'social' | 'bank'
+  label  String // label like 'phone', 'email', 'twitter', 'BPI', etc.
+  value  String // the actual data like number, email, username, etc.
+
+  user User @relation(fields: [userId], references: [id])
+}
+
+model Portfolio {
+  id              String  @id @default(cuid())
+  userId          String  @unique
+  name            String
+  title           String
+  bio             String
+  avatar          String
+  backgroundColor String
+  textColor       String
+  font            String
+  alignment       String
+  showContact     Boolean
+  showSkills      Boolean
+  skills          String
+  experience      String
+  education       String
+  projects        String
+
+  user User @relation(fields: [userId], references: [id])
 }
