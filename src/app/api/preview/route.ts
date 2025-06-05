@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "../auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth-option";
 import { NextResponse } from "next/server";
 import { PrismaClient } from "@/generated/prisma";
 
@@ -20,5 +20,5 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "No portfolio found" }, { status: 404 });
   }
 
-  return NextResponse.json(user.portfolio);
+  return NextResponse.json({...user.portfolio, username: user.username});
 }

@@ -5,13 +5,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Mail, Phone, MessageSquareText, Link as LinkIcon } from "lucide-react";
 import Loading from "@/components/ui/loading";
 
-export default function Preview() {
+type Props = {
+  userId: string;
+};
+
+
+
+export default function PublicPreview({ userId }: Props) {
   const [portfolio, setPortfolio] = useState<any>(null);
   const [links, setLinks] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchPortfolio = async () => {
-      const res = await fetch("/api/preview");
+      const res = await fetch(`/api/public/preview?userId=${userId}`);
       if (res.ok) {
         const data = await res.json();
         setPortfolio(data);
@@ -19,47 +25,35 @@ export default function Preview() {
     };
 
     const fetchLinks = async () => {
-      const res = await fetch("/api/links");
+      const res = await fetch(`/api/public/links?userId=${userId}`);
       if (res.ok) {
         const data = await res.json();
         setLinks(data);
       }
     };
 
-    fetchLinks();
     fetchPortfolio();
-  }, []);
+    fetchLinks();
+  }, [userId]);
 
   const getIcon = (label: string) => {
     const lower = label.toLowerCase();
-
-    if (lower.includes("phone") || lower.includes("call"))
-      return <Phone size={16} />;
+    if (lower.includes("phone") || lower.includes("call")) return <Phone size={16} />;
     if (lower.includes("email")) return <Mail size={16} />;
-    if (lower.includes("sms") || lower.includes("message"))
-      return <MessageSquareText size={16} />;
+    if (lower.includes("sms") || lower.includes("message")) return <MessageSquareText size={16} />;
     return <LinkIcon size={16} />;
   };
 
   const getLinkHref = (label: string, value: string) => {
     const lower = label.toLowerCase();
-
-    if (lower.includes("phone") || lower.includes("call")) {
-      return `tel:${value}`;
-    }
-    if (lower.includes("email")) {
-      return `mailto:${value}`;
-    }
-    if (lower.includes("sms") || lower.includes("message")) {
-      return `sms:${value}`;
-    }
-    if (value.startsWith("http")) {
-      return value;
-    }
+    if (lower.includes("phone") || lower.includes("call")) return `tel:${value}`;
+    if (lower.includes("email")) return `mailto:${value}`;
+    if (lower.includes("sms") || lower.includes("message")) return `sms:${value}`;
+    if (value.startsWith("http")) return value;
     return `https://${value}`;
   };
 
-  if (!portfolio) return <Loading message="fetching preview..." />;
+  if (!portfolio) return <Loading message="fetching portfolio..." />;
 
   return (
     <div className="min-h-screen px-4 py-8 sm:px-6 md:px-10">
@@ -101,46 +95,46 @@ export default function Preview() {
 
           <h1 className="text-2xl font-bold">{portfolio.name}</h1>
 
-<div
-  className={`flex gap-4  ${
-    portfolio.alignment === "left"
-      ? "justify-start"
-      : portfolio.alignment === "right"
-      ? "justify-end"
-      : "justify-center"
-  }`}
->
-  {links.map((link) => {
-    const label = link.label.toLowerCase();
-    const href = getLinkHref(link.label, link.value);
+          <div
+            className={`flex gap-4 ${
+              portfolio.alignment === "left"
+                ? "justify-start"
+                : portfolio.alignment === "right"
+                ? "justify-end"
+                : "justify-center"
+            }`}
+          >
+            {links.map((link) => {
+              const label = link.label.toLowerCase();
+              const href = getLinkHref(link.label, link.value);
 
-    if (label.includes("phone") || label.includes("call")) {
-      return (
-        <a
-          key={link.id}
-          href={href}
-          className="text-gray-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
-        >
-          <Phone size={15} />
-        </a>
-      );
-    }
+              if (label.includes("phone") || label.includes("call")) {
+                return (
+                  <a
+                    key={link.id}
+                    href={href}
+                    className="text-gray-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+                  >
+                    <Phone size={15} />
+                  </a>
+                );
+              }
 
-    if (label.includes("email")) {
-      return (
-        <a
-          key={link.id}
-          href={href}
-          className="text-gray-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
-        >
-          <Mail size={15} />
-        </a>
-      );
-    }
+              if (label.includes("email")) {
+                return (
+                  <a
+                    key={link.id}
+                    href={href}
+                    className="text-gray-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+                  >
+                    <Mail size={15} />
+                  </a>
+                );
+              }
 
-    return null;
-  })}
-</div>
+              return null;
+            })}
+          </div>
 
           <h2 className="text-lg">{portfolio.title}</h2>
           <p>{portfolio.bio}</p>
@@ -150,9 +144,7 @@ export default function Preview() {
               <h3 className="font-semibold mb-2">Contact</h3>
               <ul className="space-y-2 text-sm">
                 {links
-                  .filter(
-                    (link) => link.type === "contact" || link.type === "social"
-                  )
+                  .filter((link) => link.type === "contact" || link.type === "social")
                   .map((link) => (
                     <li
                       key={link.id}
