@@ -6,11 +6,11 @@ import PublicPreview from "@/components/ui/public-preview"; // Move out of route
 export default async function PublicPreviewPage({
   params,
 }: {
-  params: { username: string };
+  params: Promise<{ username: string }>;
 }) {
   // Await params before destructuring
-  const awaitedParams = await params;
-  const user = await getUserByUsername(awaitedParams.username);
+ 
+  const user = await getUserByUsername((await params).username);
 
   if (!user) {
     notFound();
