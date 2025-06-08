@@ -11,7 +11,7 @@
     "generate": "prisma generate",
     "postinstall": "prisma generate",
     "format": "prettier --write .",
-    "typecheck": "tsc --noEmit"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.3.1",
