@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import "../globals.css";
-import Logo from "../../../public/images/taptag.jpg"
+// import Logo from "../../../public/images/taptag.jpg"
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,11 +37,13 @@ export default function AuthLayout({
               href="/"
               className="flex items-center space-x-2 text-yellow-500 text-2xl font-bold"
             >
-              <img
-                src={Logo.src}
+              {/* Logo icon */}
+              <Image
+                src="/images/taptag.jpg"
                 alt="TapTag logo"
                 className="w-20 h-10"
               />
+              {/* <span>TapTag</span> */}
               
             </Link>
 

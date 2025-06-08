@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { Home, Link2, Palette, Share2, Eye, LogOut } from "lucide-react";
-import Logo from "../../../public/images/taptag.jpg"
+// import Logo from "../../../public/images/taptag.jpg"
+import Image from "next/image";
 
 export default function Navigation() {
   const pathname = usePathname();
@@ -27,8 +28,9 @@ export default function Navigation() {
             href="/home"
             className="flex items-center space-x-2 text-yellow-500 text-xl sm:text-2xl font-bold"
           >
-            <img
-              src={Logo.src}
+            {/* Logo icon */}
+            <Image
+              src="/images/taptag.jpg"
               alt="TapTag logo"
               className="w-20 h-10"
             />
