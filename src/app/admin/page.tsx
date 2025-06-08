@@ -27,12 +27,6 @@ import {
 } from "recharts";
 import { format } from "date-fns";
 
-const dummyUserGrowth = [
-  { month: "Jan", users: 10 },
-  { month: "Feb", users: 25 },
-  { month: "Mar", users: 40 },
-  { month: "Apr", users: 55 },
-];
 
 const COLORS = ["#16a34a", "#dc2626"];
 
