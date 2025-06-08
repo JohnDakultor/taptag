@@ -17,14 +17,23 @@ datasource db {
 model User {
   id        String   @id @default(cuid())
   email     String   @unique
-  username String   @unique
+  username  String   @unique
   name      String?
   password  String
   createdAt DateTime @default(now())
 
-  links Link[] // <-- Add this line
+  links Link[]
+
+  role Role @default(USER)
 
   portfolio Portfolio?
+
+  keys Key[]
+}
+
+enum Role {
+  USER
+  ADMIN
 }
 
 model Link {
@@ -56,4 +65,14 @@ model Portfolio {
   projects        String
 
   user User @relation(fields: [userId], references: [id])
+}
+
+model Key {
+  id        String   @id @default(cuid())
+  value     String   @unique
+  activated Boolean  @default(false)
+  usedBy    String? // userId
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [usedBy], references: [id])
 }

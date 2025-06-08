@@ -11,21 +11,32 @@ export default function LoginPage() {
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError("");
+  e.preventDefault();
+  setError("");
 
-    const res = await signIn("credentials", {
-      redirect: false, 
-      email: form.email,
-      password: form.password,
-    });
+  const res = await signIn("credentials", {
+    redirect: false,
+    email: form.email,
+    password: form.password,
+  });
 
-    if (res?.ok) {
-      router.push("/home"); // Redirect after successful login
+  if (res?.ok) {
+    const sessionRes = await fetch("/api/auth/session");
+    const session = await sessionRes.json();
+    console.log("Session:", session);
+
+
+    if (session?.user?.role === "ADMIN") {
+      router.push("/admin");
     } else {
-      setError(res?.error || "Invalid email or password");
+      router.push("/home");
     }
-  };
+  } else {
+    setError(res?.error || "Invalid email or password");
+  }
+  
+};
+
 
   return (
     <main className="min-h-screen bg-neutral-800 flex flex-col items-center justify-center px-6 py-12 text-white">

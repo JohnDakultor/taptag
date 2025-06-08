@@ -25,7 +25,7 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid email or password");
         }
 
-        return { id: user.id, email: user.email, username: user.username };
+        return { id: user.id, email: user.email, username: user.username, role: user.role,  };
       },
     }),
   ],
@@ -39,6 +39,8 @@ export const authOptions: NextAuthOptions = {
     async jwt({ token, user }) {
       if (user) {
     token.id = user.id;
+    token.username = user.username;
+    token.role = user.role;
   }
   return token;
     },
@@ -46,6 +48,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user && token) {
         session.user.id = token.id as string;
         session.user.username = token.username as string;
+        session.user.role = token.role as string;
       }
       return session;
     },

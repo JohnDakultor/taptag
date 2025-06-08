@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Key" ADD COLUMN     "activated" BOOLEAN NOT NULL DEFAULT false,
+ADD COLUMN     "usedBy" TEXT;
+
+-- AddForeignKey
+ALTER TABLE "Key" ADD CONSTRAINT "Key_usedBy_fkey" FOREIGN KEY ("usedBy") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

@@ -16,7 +16,7 @@ export default function Home() {
       <section className="text-center" data-aos="fade-down">
         <h1 className="text-5xl font-extrabold mb-4 text-yellow-500">TapTag</h1>
         <p className="text-lg text-neutral-300 max-w-xl mx-auto">
-          Instantly share your digital portfolio with a tap. Built for professionals, creators, and anyone who wants to connect smarter.
+          Connections made simple.
         </p>
       </section>
 

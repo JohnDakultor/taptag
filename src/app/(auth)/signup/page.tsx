@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export default function SignupPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ name: "", email: "", password: "", username: "" });
+  const [form, setForm] = useState({ name: "", email: "", password: "", username: "", key: "" });
   const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -75,6 +75,21 @@ export default function SignupPage() {
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               placeholder="you@example.com"
+              required
+              className="w-full rounded-lg bg-neutral-700 border border-neutral-600 px-4 py-3 text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="key" className="block mb-2 font-semibold text-neutral-300">
+              Activation Key
+            </label>
+            <input
+              id="key"
+              type="text"
+              value={form.key}
+              onChange={(e) => setForm({ ...form, key: e.target.value })}
+              placeholder="key from card"
               required
               className="w-full rounded-lg bg-neutral-700 border border-neutral-600 px-4 py-3 text-white placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-yellow-500"
             />
