@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "prisma migrate deploy && next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "next lint --no-interactive",
     "generate": "prisma generate",
     "postinstall": "prisma generate"
   },
@@ -45,11 +45,14 @@
     "zod": "^3.25.56"
   },
   "devDependencies": {
+    "@swc/core": "^1.11.31",
     "@tailwindcss/postcss": "^4",
     "@types/aos": "^3.0.7",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "eslint": "9.28.0",
+    "eslint-config-next": "15.3.3",
     "prettier": "^3.5.3",
     "prisma": "^6.8.2",
     "tailwindcss": "^4",
