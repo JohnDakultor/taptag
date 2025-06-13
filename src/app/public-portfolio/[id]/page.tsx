@@ -29,9 +29,9 @@ const prisma = new PrismaClient();
 export default async function PublicPreviewPage({
   params,
 }: {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }) {
-  const keyValue = params.id;
+  const keyValue = (await params).id;
 
   const key = await prisma.key.findUnique({
     where: { value: keyValue },
