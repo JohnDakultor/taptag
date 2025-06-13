@@ -14,3 +14,9 @@ export async function getUserByEmail(email: string) {
   });
 }
 
+export async function getUserById(value: string | undefined) {
+  if (!value) return null;
+  return prisma.key.findUnique({
+    where: { value },
+  });
+}

@@ -41,7 +41,9 @@ export default function AuthLayout({
               <Image
                 src="/images/taptag.jpg"
                 alt="TapTag logo"
-                className="w-20 h-10"
+                // className="w-20 h-10"
+                width={90}
+                height={50}
               />
               {/* <span>TapTag</span> */}
               

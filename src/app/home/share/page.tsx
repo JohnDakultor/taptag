@@ -8,17 +8,17 @@ import { Label } from "@/components/ui/label";
 import { QRCodeSVG } from "qrcode.react";
 
 export default function Share() {
-  const [username, setUsername] = useState("");
+  const [key, setKey] = useState("");
   const [copied, setCopied] = useState(false);
 
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const publicUrl = username ? `${baseUrl}/user/${username}` : "";
+  const publicUrl = key ? `${baseUrl}/public-portfolio/${key}` : "";
 
   useEffect(() => {
     fetch("/api/me")
       .then((res) => res.json())
       .then((data) => {
-        if (data.username) setUsername(data.username);
+        if (data.key) setKey(data.key);
       });
   }, []);
 
@@ -28,7 +28,7 @@ export default function Share() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  if (!username) return null;
+  if (!key) return null;
 
   return (
     <div className="max-w-xl mx-auto px-4 py-10 space-y-6">
@@ -48,10 +48,9 @@ export default function Share() {
           </div>
 
           <div className="space-y-2 flex flex-col items-center justify-center text-center">
-  <Label className="text-yellow-400">Or Scan QR Code</Label>
-  <QRCodeSVG value={publicUrl} size={160} bgColor="#fff" />
-</div>
-
+            <Label className="text-yellow-400">Or Scan QR Code</Label>
+            <QRCodeSVG value={publicUrl} size={160} bgColor="#fff" />
+          </div>
         </CardContent>
       </Card>
     </div>

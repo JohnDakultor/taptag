@@ -55,10 +55,10 @@ export default function PublicPreview({ userId }: Props) {
 
   if (!portfolio) return <Loading message="fetching portfolio..." />;
 
-  return (
-    <div className="min-h-screen px-4 py-8 sm:px-6 md:px-10">
+   return (
+    <div className="min-h-screen px-4 py-10 sm:px-6 md:px-10">
       <Card
-        className="max-w-xl mx-auto shadow-md rounded-2xl"
+        className="max-w-xl mx-auto backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-3xl transition-all duration-500"
         style={{
           backgroundColor: portfolio.backgroundColor || "#fff",
           color: portfolio.textColor || "#000",
@@ -66,7 +66,7 @@ export default function PublicPreview({ userId }: Props) {
         }}
       >
         <CardContent
-          className="space-y-6 p-6 flex flex-col"
+          className="space-y-6 p-8 flex flex-col"
           style={{
             textAlign: portfolio.alignment,
             alignItems:
@@ -77,11 +77,12 @@ export default function PublicPreview({ userId }: Props) {
                 : "center",
           }}
         >
+          {/* Avatar */}
           {portfolio.avatar && (
             <img
               src={portfolio.avatar}
               alt="Avatar"
-              className="w-20 h-20 rounded-full"
+              className="w-24 h-24 rounded-full ring-4 ring-white/20 shadow-md transition-transform hover:scale-105"
               style={{
                 margin:
                   portfolio.alignment === "left"
@@ -93,8 +94,10 @@ export default function PublicPreview({ userId }: Props) {
             />
           )}
 
-          <h1 className="text-2xl font-bold">{portfolio.name}</h1>
+          {/* Name */}
+          <h1 className="text-3xl font-extrabold tracking-tight">{portfolio.name}</h1>
 
+          {/* Icons (email/phone) */}
           <div
             className={`flex gap-4 ${
               portfolio.alignment === "left"
@@ -113,7 +116,7 @@ export default function PublicPreview({ userId }: Props) {
                   <a
                     key={link.id}
                     href={href}
-                    className="text-gray-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+                    className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all text-inherit shadow-sm"
                   >
                     <Phone size={15} />
                   </a>
@@ -125,7 +128,7 @@ export default function PublicPreview({ userId }: Props) {
                   <a
                     key={link.id}
                     href={href}
-                    className="text-gray-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
+                    className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all text-inherit shadow-sm"
                   >
                     <Mail size={15} />
                   </a>
@@ -136,25 +139,27 @@ export default function PublicPreview({ userId }: Props) {
             })}
           </div>
 
-          <h2 className="text-lg">{portfolio.title}</h2>
-          <p>{portfolio.bio}</p>
+          {/* Title & Bio */}
+          <h2 className="text-xl font-semibold">{portfolio.title}</h2>
+          <p className="leading-relaxed">{portfolio.bio}</p>
 
+          {/* Contact Section */}
           {portfolio.showContact && links.length > 0 && (
-            <div className="w-full" style={{ textAlign: portfolio.alignment }}>
-              <h3 className="font-semibold mb-2">Contact</h3>
+            <div className="w-full space-y-3" style={{ textAlign: portfolio.alignment }}>
+              <h3 className="text-lg font-semibold">Contact</h3>
               <ul className="space-y-2 text-sm">
                 {links
                   .filter((link) => link.type === "contact" || link.type === "social")
                   .map((link) => (
                     <li
                       key={link.id}
-                      className={`inline-flex items-center gap-2 ${
+                      className={`inline-flex items-center gap-2 w-full ${
                         portfolio.alignment === "left"
                           ? "justify-start"
                           : portfolio.alignment === "right"
                           ? "justify-end"
                           : "justify-center"
-                      } w-full`}
+                      }`}
                     >
                       {getIcon(link.label)}
                       <a
@@ -171,32 +176,31 @@ export default function PublicPreview({ userId }: Props) {
             </div>
           )}
 
+          {/* Section Blocks */}
           {portfolio.skills && (
-            <div className="w-full">
-              <h3 className="font-semibold">Skills</h3>
-              <p>{portfolio.skills}</p>
-            </div>
+            <SectionBlock title="Skills" content={portfolio.skills} />
           )}
           {portfolio.experience && (
-            <div className="w-full">
-              <h3 className="font-semibold">Experience</h3>
-              <p>{portfolio.experience}</p>
-            </div>
+            <SectionBlock title="Experience" content={portfolio.experience} />
           )}
           {portfolio.education && (
-            <div className="w-full">
-              <h3 className="font-semibold">Education</h3>
-              <p>{portfolio.education}</p>
-            </div>
+            <SectionBlock title="Education" content={portfolio.education} />
           )}
           {portfolio.projects && (
-            <div className="w-full">
-              <h3 className="font-semibold">Projects</h3>
-              <p>{portfolio.projects}</p>
-            </div>
+            <SectionBlock title="Projects" content={portfolio.projects} />
           )}
         </CardContent>
       </Card>
+    </div>
+  );
+}
+
+
+function SectionBlock({ title, content }: { title: string; content: string }) {
+  return (
+    <div className="w-full p-4 bg-white/10 rounded-xl shadow-sm backdrop-blur-sm transition-all">
+      <h3 className="text-base font-semibold mb-2">{title}</h3>
+      <p className="text-sm leading-relaxed">{content}</p>
     </div>
   );
 }
