@@ -242,18 +242,14 @@ export default function Preview() {
 
   const getIcon = (label: string) => {
     const lower = label.toLowerCase();
-
-    if (lower.includes("phone") || lower.includes("call"))
-      return <Phone size={16} />;
+    if (lower.includes("phone") || lower.includes("call")) return <Phone size={16} />;
     if (lower.includes("email")) return <Mail size={16} />;
-    if (lower.includes("sms") || lower.includes("message"))
-      return <MessageSquareText size={16} />;
+    if (lower.includes("sms") || lower.includes("message")) return <MessageSquareText size={16} />;
     return <LinkIcon size={16} />;
   };
 
   const getLinkHref = (label: string, value: string) => {
     const lower = label.toLowerCase();
-
     if (lower.includes("phone") || lower.includes("call")) return `tel:${value}`;
     if (lower.includes("email")) return `mailto:${value}`;
     if (lower.includes("sms") || lower.includes("message")) return `sms:${value}`;
@@ -274,7 +270,7 @@ export default function Preview() {
         }}
       >
         <CardContent
-          className="space-y-6 p-8 flex flex-col"
+          className="space-y-6 p-8 flex flex-col min-w-0 overflow-hidden"
           style={{
             textAlign: portfolio.alignment,
             alignItems:
@@ -303,9 +299,11 @@ export default function Preview() {
           )}
 
           {/* Name */}
-          <h1 className="text-3xl font-extrabold tracking-tight">{portfolio.name}</h1>
+          <h1 className="text-3xl font-extrabold tracking-tight break-words">
+            {portfolio.name}
+          </h1>
 
-          {/* Icons (email/phone) */}
+          {/* Icons */}
           <div
             className={`flex gap-4 ${
               portfolio.alignment === "left"
@@ -348,13 +346,13 @@ export default function Preview() {
           </div>
 
           {/* Title & Bio */}
-          <h2 className="text-xl font-semibold">{portfolio.title}</h2>
-          <p className="leading-relaxed">{portfolio.bio}</p>
+          <h2 className="text-xl font-semibold break-words">{portfolio.title}</h2>
+          <p className="leading-relaxed break-words whitespace-pre-wrap">{portfolio.bio}</p>
 
           {/* Contact Section */}
           {portfolio.showContact && links.length > 0 && (
             <div className="w-full space-y-3" style={{ textAlign: portfolio.alignment }}>
-              <h3 className="text-lg font-semibold">Contact</h3>
+              <h3 className="text-lg font-semibold break-words">Contact</h3>
               <ul className="space-y-2 text-sm">
                 {links
                   .filter((link) => link.type === "contact" || link.type === "social")
@@ -374,7 +372,7 @@ export default function Preview() {
                         href={getLinkHref(link.label, link.value)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="underline hover:opacity-80 transition"
+                        className="underline hover:opacity-80 transition break-words"
                       >
                         <strong>{link.label}:</strong> {link.value}
                       </a>
@@ -403,12 +401,11 @@ export default function Preview() {
   );
 }
 
-
 function SectionBlock({ title, content }: { title: string; content: string }) {
   return (
-    <div className="w-full p-4 bg-white/10 rounded-xl shadow-sm backdrop-blur-sm transition-all">
-      <h3 className="text-base font-semibold mb-2">{title}</h3>
-      <p className="text-sm leading-relaxed">{content}</p>
+    <div className="w-full p-4 bg-white/10 rounded-xl shadow-sm backdrop-blur-sm transition-all overflow-hidden">
+      <h3 className="text-base font-semibold mb-2 break-words">{title}</h3>
+      <p className="text-sm leading-relaxed break-words whitespace-pre-wrap">{content}</p>
     </div>
   );
 }

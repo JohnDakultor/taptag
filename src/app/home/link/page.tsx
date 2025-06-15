@@ -16,7 +16,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select"; // adjust path if needed
+} from "@/components/ui/select";
 
 import {
   Form,
@@ -54,7 +54,7 @@ const contactOptions = [
 export default function LinkPage() {
   const [contacts, setContacts] = useState([{ type: "phone", value: "" }]);
   const [socials, setSocials] = useState([{ platform: "", username: "" }]);
-  const [banks, setBanks] = useState([{ bankName: "", accountNumber: "" }]);
+  // const [banks, setBanks] = useState([{ bankName: "", accountNumber: "" }]);
 
   const form = useForm({
     defaultValues: {
@@ -74,7 +74,7 @@ export default function LinkPage() {
 
       const contacts = data.filter((l: any) => l.type === "contact");
       const socials = data.filter((l: any) => l.type === "social");
-      const banks = data.filter((l: any) => l.type === "bank");
+      // const banks = data.filter((l: any) => l.type === "bank");
 
       setContacts(
         contacts.map((c: any) => ({ type: c.label, value: c.value }))
@@ -82,9 +82,9 @@ export default function LinkPage() {
       setSocials(
         socials.map((s: any) => ({ platform: s.label, username: s.value }))
       );
-      setBanks(
-        banks.map((b: any) => ({ bankName: b.label, accountNumber: b.value }))
-      );
+      // setBanks(
+      //   banks.map((b: any) => ({ bankName: b.label, accountNumber: b.value }))
+      // );
     }
 
     fetchLinks();
@@ -96,8 +96,6 @@ export default function LinkPage() {
 
       {/* Contacts */}
       <section className="border border-neutral-700 rounded-lg p-6 mb-8">
-        
-        {/* Contacts */}
         <Form {...form}>
           <section className="border border-neutral-700 rounded-lg p-6 mb-8">
             <h2 className={`text-xl font-semibold mb-6 ${gold}`}>Contacts</h2>
@@ -174,21 +172,10 @@ export default function LinkPage() {
             </Button>
           </section>
         </Form>
-
-        {/* <Button
-          variant="ghost"
-          size="sm"
-          className={`${gold} flex items-center`}
-          onClick={() => handleAdd(setContacts, { type: "phone", value: "" })}
-        >
-          <Plus size={16} className="mr-1" /> Add Contact
-        </Button> */}
       </section>
 
       {/* Social Media */}
       <section className="border border-neutral-700 rounded-lg p-6 mb-8">
-        
-        {/* Social Media */}
         <Form {...form}>
           <section className="border border-neutral-700 rounded-lg p-6 mb-8">
             <h2 className={`text-xl font-semibold mb-6 ${gold}`}>
@@ -248,21 +235,11 @@ export default function LinkPage() {
             </Button>
           </section>
         </Form>
-
-        {/* <Button
-          variant="ghost"
-          size="sm"
-          className={`${gold} flex items-center`}
-          onClick={() => handleAdd(setSocials, { platform: "", username: "" })}
-        >
-          <Plus size={16} className="mr-1" /> Add Social Media
-        </Button> */}
       </section>
 
-      {/* Bank Accounts */}
+      {/* Bank Accounts (commented out) */}
+      {/*
       <section className="border border-neutral-700 rounded-lg p-6 mb-8">
-        
-        {/* Bank Accounts */}
         <Form {...form}>
           <section className="border border-neutral-700 rounded-lg p-6 mb-8">
             <h2 className={`text-xl font-semibold mb-6 ${gold}`}>
@@ -322,93 +299,102 @@ export default function LinkPage() {
             </Button>
           </section>
         </Form>
-{/* 
-        <Button
-          variant="ghost"
-          size="sm"
-          className={`${gold} flex items-center`}
-          onClick={() =>
-            handleAdd(setBanks, { bankName: "", accountNumber: "" })
-          }
-        >
-          <Plus size={16} className="mr-1" /> Add Bank Account
-        </Button> */}
       </section>
+      */}
 
       {/* Saved Links */}
       <section className="mt-8 border-t border-neutral-700 pt-6">
-  <h2 className={`text-xl font-semibold mb-4 ${gold}`}>
-    Your Saved Links
-  </h2>
+        <h2 className={`text-xl font-semibold mb-4 ${gold}`}>
+          Your Saved Links
+        </h2>
 
-  {/* Contacts */}
-  {contacts.length > 0 && (
-    <div className="mb-6">
-      <h3 className="text-lg font-medium text-neutral-300 mb-2">Contacts</h3>
-      {contacts.map((c, i) => (
-        <div key={i} className="flex items-center gap-2 mb-2">
-          {c.type === "phone" && <Phone size={16} className="text-yellow-400" />}
-          {c.type === "sms" && <MessageSquareText size={16} className="text-yellow-400" />}
-          {c.type === "email" && <Mail size={16} className="text-yellow-400" />}
-          <a
-            href={
-              c.type === "email"
-                ? `mailto:${c.value}`
-                : c.type === "sms"
-                ? `sms:${c.value}`
-                : `tel:${c.value}`
-            }
-            className="text-yellow-400 hover:underline text-sm"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {c.value}
-          </a>
-        </div>
-      ))}
-    </div>
-  )}
+        {/* Contacts */}
+        {contacts.length > 0 && (
+          <div className="mb-6">
+            <h3 className="text-lg font-medium text-neutral-300 mb-2">
+              Contacts
+            </h3>
+            {contacts.map((c, i) => (
+              <div key={i} className="flex items-center gap-2 mb-2">
+                {c.type === "phone" && (
+                  <Phone size={16} className="text-yellow-400" />
+                )}
+                {c.type === "sms" && (
+                  <MessageSquareText size={16} className="text-yellow-400" />
+                )}
+                {c.type === "email" && (
+                  <Mail size={16} className="text-yellow-400" />
+                )}
+                <a
+                  href={
+                    c.type === "email"
+                      ? `mailto:${c.value}`
+                      : c.type === "sms"
+                      ? `sms:${c.value}`
+                      : `tel:${c.value}`
+                  }
+                  className="text-yellow-400 hover:underline text-sm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {c.value}
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
 
-  {/* Social Media */}
-  {socials.length > 0 && (
-    <div className="mb-6">
-      <h3 className="text-lg font-medium text-neutral-300 mb-2">Social Media</h3>
-      {socials.map((s, i) => (
-        <div key={i} className="flex items-center gap-2 mb-2">
-          <Globe size={16} className="text-yellow-400" />
-          <a
-            href={
-              s.username.startsWith("http")
-                ? s.username
-                : `https://www.${s.platform.toLowerCase()}.com/${s.username.replace("@", "")}`
-            }
-            className="text-yellow-400 hover:underline text-sm"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {s.platform}: {s.username}
-          </a>
-        </div>
-      ))}
-    </div>
-  )}
+        {/* Social Media */}
+        {socials.length > 0 && (
+          <div className="mb-6">
+            <h3 className="text-lg font-medium text-neutral-300 mb-2">
+              Social Media
+            </h3>
+            {socials.map((s, i) => (
+              <div key={i} className="flex items-center gap-2 mb-2">
+                <Globe size={16} className="text-yellow-400" />
+                <a
+                  href={
+                    s.username.startsWith("http")
+                      ? s.username
+                      : `https://www.${s.platform.toLowerCase()}.com/${s.username.replace(
+                          "@",
+                          ""
+                        )}`
+                  }
+                  className="text-yellow-400 hover:underline text-sm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {s.platform}: {s.username}
+                </a>
+              </div>
+            ))}
+          </div>
+        )}
 
-  {/* Banks */}
-  {banks.length > 0 && (
-    <div>
-      <h3 className="text-lg font-medium text-neutral-300 mb-2">Bank Accounts</h3>
-      {banks.map((b, i) => (
-        <div
-          key={i}
-          className="flex items-center justify-between text-sm text-neutral-400 mb-2 border border-neutral-700 px-3 py-2 rounded-md"
-        >
-          <span className="font-medium">{b.bankName}</span>
-          <span className="font-mono tracking-wider">{b.accountNumber}</span>
-        </div>
-      ))}
-    </div>
-  )}
-</section>
+        {/* Bank Accounts Display (commented out) */}
+        {/*
+        {banks.length > 0 && (
+          <div>
+            <h3 className="text-lg font-medium text-neutral-300 mb-2">
+              Bank Accounts
+            </h3>
+            {banks.map((b, i) => (
+              <div
+                key={i}
+                className="flex items-center justify-between text-sm text-neutral-400 mb-2 border border-neutral-700 px-3 py-2 rounded-md"
+              >
+                <span className="font-medium">{b.bankName}</span>
+                <span className="font-mono tracking-wider">
+                  {b.accountNumber}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
+        */}
+      </section>
 
       <Button
         className="w-full py-3 mt-4 bg-yellow-500 hover:bg-yellow-400 text-black font-semibold rounded-md transition"
@@ -424,11 +410,11 @@ export default function LinkPage() {
               label: s.platform,
               value: s.username,
             })),
-            ...banks.map((b) => ({
-              type: "bank",
-              label: b.bankName,
-              value: b.accountNumber,
-            })),
+            // ...banks.map((b) => ({
+            //   type: "bank",
+            //   label: b.bankName,
+            //   value: b.accountNumber,
+            // })),
           ];
 
           const res = await fetch("/api/links", {
