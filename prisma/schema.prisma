@@ -29,6 +29,8 @@ model User {
   portfolio Portfolio?
 
   keys Key[]
+
+  resetTokens PasswordResetToken[]
 }
 
 enum Role {
@@ -75,4 +77,14 @@ model Key {
   createdAt DateTime @default(now())
 
   user User? @relation(fields: [usedBy], references: [id])
+}
+
+
+model PasswordResetToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }

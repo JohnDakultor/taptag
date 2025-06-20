@@ -39,13 +39,13 @@ export default function AuthLayout({
             >
               {/* Logo icon */}
               <Image
-                src="/images/taptag.jpg"
+                src="/images/icon.png"
                 alt="TapTag logo"
                 // className="w-20 h-10"
-                width={90}
-                height={50}
+                width={40}
+                height={30}
               />
-              {/* <span>TapTag</span> */}
+              <span>TapTag</span>
               
             </Link>
 

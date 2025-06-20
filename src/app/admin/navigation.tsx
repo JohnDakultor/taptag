@@ -11,7 +11,7 @@ export default function Navigation() {
       <header className="hidden sm:block w-full bg-neutral-900 border-b border-neutral-700">
         <nav className="max-w-7xl mx-auto flex justify-between items-center px-4 py-3 sm:px-6">
           {/* Left side: logo or links (optional) */}
-          <div className="text-yellow-500 font-bold text-lg">Admin</div>
+          <div className="text-yellow-500 font-bold text-lg">Administrator</div>
 
           {/* Right side: logout */}
           <div className="flex items-center space-x-6 text-sm">

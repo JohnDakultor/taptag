@@ -45,7 +45,7 @@ export default function Dashboard() {
     <main className="relative min-h-screen flex items-center justify-center px-4 py-12 bg-neutral-800 overflow-hidden">
       <div className="absolute inset-0 -z-10 animate-gradient-x bg-gradient-to-r from-purple-700 via-pink-500 to-yellow-500 bg-[length:300%_300%]" />
 
-      <Card className="w-full max-w-3xl backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl rounded-3xl text-white animate-fade-in transition-all duration-700">
+      <Card className="w-full max-w-3xl backdrop-blur-xl bg-white/5 border border-white/10 shadow-2xl rounded-3xl text-white animate-fade-in transition-all duration-700 overflow-hidden">
         <CardContent className="p-8 sm:p-12 flex flex-col items-center gap-8">
           {/* Avatar + Name + Title */}
           <div className="flex flex-col items-center text-center gap-3">
@@ -84,7 +84,7 @@ export default function Dashboard() {
                 <div className="flex items-center gap-2 text-lg font-semibold text-white">
                   <Briefcase size={18} /> Experience
                 </div>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap break-words w-full">
                   {portfolio.experience}
                 </p>
               </div>
@@ -94,7 +94,7 @@ export default function Dashboard() {
                 <div className="flex items-center gap-2 text-lg font-semibold text-white">
                   <GraduationCap size={18} /> Education
                 </div>
-                <p className="text-sm text-gray-300 leading-relaxed">
+                <p className="text-sm text-gray-300 leading-relaxed whitespace-pre-wrap break-words w-full">
                   {portfolio.education}
                 </p>
               </div>
