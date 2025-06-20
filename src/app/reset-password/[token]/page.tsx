@@ -1,4 +1,5 @@
 // app/reset-password/[token]/page.tsx
+
 import { Metadata } from "next";
 import ResetPasswordClient from "@/components/ui/reset-password";
 
@@ -6,10 +7,11 @@ export const metadata: Metadata = {
   title: "Reset Password",
 };
 
-export default function ResetPasswordPage({
+export default async function ResetPasswordPage({
   params,
 }: {
-  params: { token: string };
+  params: Promise<{ token: string }>;
 }) {
-  return <ResetPasswordClient token={params.token} />;
+  const { token } = await params;
+  return <ResetPasswordClient token={token} />;
 }
