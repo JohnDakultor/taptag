@@ -2,16 +2,14 @@
 import { Metadata } from "next";
 import ResetPasswordClient from "@/components/ui/reset-password";
 
-interface ResetPasswordPageProps {
-  params: {
-    token: string;
-  };
-}
-
 export const metadata: Metadata = {
   title: "Reset Password",
 };
 
-export default function ResetPasswordPage({ params }: ResetPasswordPageProps) {
+export default function ResetPasswordPage({
+  params,
+}: {
+  params: { token: string };
+}) {
   return <ResetPasswordClient token={params.token} />;
 }
