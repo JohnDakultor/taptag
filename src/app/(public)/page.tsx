@@ -6,192 +6,171 @@ import Image from "next/image";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
+const reviews = [
+  {
+    name: "Jane D.",
+    avatar: "https://randomuser.me/api/portraits/women/1.jpg",
+    text: "⭐️⭐️⭐️⭐️⭐️ - Amazing product! Shared my info in seconds.",
+  },
+  {
+    name: "Michael T.",
+    avatar: "https://randomuser.me/api/portraits/men/2.jpg",
+    text: "⭐️⭐️⭐️⭐️⭐️ - TapTag is a game-changer for networking!",
+  },
+  {
+    name: "Sofia R.",
+    avatar: "https://randomuser.me/api/portraits/women/3.jpg",
+    text: "⭐️⭐️⭐️⭐️ - Slick, simple, sustainable.",
+  },
+];
 
 export default function Home() {
+  const [ci, setCi] = useState(0);
+
   useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
-
-  const reviews = [
-    { name: "Jane D.", avatar: "https://randomuser.me/api/portraits/women/1.jpg", text: "⭐️⭐️⭐️⭐️⭐️  - Amazing product! Shared my info in seconds." },
-    { name: "Michael T.", avatar: "https://randomuser.me/api/portraits/men/2.jpg", text: "⭐️⭐️⭐️⭐️⭐️  - TapTag is a game-changer for networking!" },
-    { name: "Sofia R.", avatar: "https://randomuser.me/api/portraits/women/3.jpg", text: "⭐️⭐️⭐️⭐️   - Slick, simple, sustainable." },
-    { name: "Daniel C.", avatar: "https://randomuser.me/api/portraits/men/4.jpg", text: "⭐️⭐️⭐️⭐️⭐️  - Clients love how easy it is to connect." },
-    { name: "Ava N.", avatar: "https://randomuser.me/api/portraits/women/5.jpg", text: "⭐️⭐️⭐️⭐️⭐️  - Clean design and effortless sharing!" },
-    { name: "Leo B.", avatar: "https://randomuser.me/api/portraits/men/6.jpg", text: "⭐️⭐️⭐️⭐️⭐️  - A must-have for events and expos." },
-    { name: "Emily F.", avatar: "https://randomuser.me/api/portraits/women/7.jpg", text: "⭐️⭐️⭐️⭐️⭐️  - The future of networking is here!" },
-    { name: "Chris M.", avatar: "https://randomuser.me/api/portraits/men/8.jpg", text: "⭐️⭐️⭐️⭐️   - Great value and performance." },
-    { name: "Lily A.", avatar: "https://randomuser.me/api/portraits/women/9.jpg", text: "⭐️⭐️⭐️⭐️⭐️  - Love the eco-friendly concept!" },
-    { name: "Josh K.", avatar: "https://randomuser.me/api/portraits/men/10.jpg", text: "⭐️⭐️⭐️⭐️⭐️  - Seamless and professional impression every time." },
-  ];
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Auto-slide carousel every 4 seconds
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % reviews.length);
-    }, 4000);
-    return () => clearInterval(interval);
+    AOS.init({ duration: 800 });
+    const i = setInterval(() => setCi((p) => (p + 1) % reviews.length), 4000);
+    return () => clearInterval(i);
   }, []);
 
   return (
-    <main className="min-h-screen bg-neutral-800 px-6 py-12 space-y-32 text-white overflow-hidden">
-      {/* Hero Section */}
-      <section className="text-center space-y-4" data-aos="fade-down">
-        <h1 className="text-5xl font-extrabold text-yellow-500">TapTag</h1>
-        <p className="text-lg text-neutral-300 max-w-xl mx-auto">
-          Connections made simple.
-        </p>
-      </section>
-
-      {/* Product Image */}
-      <section className="flex justify-center" data-aos="zoom-in">
-        <div className="rounded-xl overflow-hidden shadow-2xl border border-gray-600">
+    <main className="text-white scroll-smooth overflow-x-hidden max-w-screen bg-black font-serif">
+      {/* Hero */}
+      <section className="min-h-screen w-full flex flex-col lg:flex-row items-center px-6 py-24 bg-black">
+        <div
+          className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-8 mb-12 lg:mb-0 lg:pr-20"
+          data-aos="fade-right"
+        >
+          <h1 className="text-5xl font-bold text-[#D4AF37]">TapTag</h1>
+          <p className="text-lg text-neutral-300 max-w-md leading-relaxed">
+            Share your digital presence with effortless elegance.
+          </p>
+          {/* <Button className="bg-[#D4AF37] text-black hover:bg-[#c6a130] px-6 py-3 rounded-full text-lg shadow-lg transition">
+            Get Started
+          </Button> */}
+        </div>
+        <div className="w-full lg:w-1/2" data-aos="zoom-in">
           <Image
-            src="/images/nfc-card-mockup.png"
-            alt="TapTag NFC Card"
+            src="/images/3.png"
+            alt="TapTag in action"
             width={800}
-            height={500}
-            className="object-cover w-full h-auto"
+            height={600}
+            className="w-full h-auto object-cover rounded-2xl shadow-2xl"
           />
         </div>
       </section>
 
-      {/* What is NFC */}
-      <section className="max-w-6xl mx-auto space-y-8 bg-neutral-700 p-8 rounded-xl" data-aos="fade-up">
-        <h2 className="text-4xl font-bold text-center text-yellow-500">What is NFC?</h2>
-        <p className="text-neutral-300 text-lg text-center max-w-3xl mx-auto">
-          Near Field Communication (NFC) enables fast, contactless data exchange between devices within just a few centimeters.
-        </p>
-        <div className="grid md:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="rounded-xl overflow-hidden group relative shadow-md">
-              <Image
-                src={`/images/${i}.png`}
-                alt="NFC"
-                 width={800}
-            height={500}
-                className="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500"
-              />
-            </div>
-          ))}
+      {/* What is TapTag */}
+      <section className="min-h-screen flex flex-col lg:flex-row items-center bg-[#0a0a0a] px-6 py-20">
+        <div className="w-full lg:w-1/2 mb-12 lg:mb-0" data-aos="zoom-in">
+          <Image
+            src="/images/1.png"
+            alt="TapTag NFC"
+            width={800}
+            height={600}
+            className="rounded-2xl shadow-2xl"
+          />
+        </div>
+        <div
+          className="w-full lg:w-1/2 space-y-6 lg:pl-16 text-center lg:text-left"
+          data-aos="fade-left"
+        >
+          <h2 className="text-4xl font-semibold text-[#D4AF37]">What is TapTag?</h2>
+          <p className="text-lg text-neutral-300 leading-relaxed max-w-xl">
+            A luxurious contactless NFC card that instantly shares your digital profile — no apps or typing required. Designed for professionals, creators, and brands who value presentation.
+          </p>
         </div>
       </section>
 
-      
-<section
-  className="relative max-w-6xl mx-auto rounded-xl overflow-hidden bg-neutral-800"
-  data-aos="fade-up"
->
-  <Image
-    src="/images/4.png"
-    alt="Business background"
-    fill
-    className="object-cover opacity-20"
-  />
-  <div className="relative p-10 md:p-20 z-10 space-y-8">
-    <h2 className="text-4xl font-bold text-yellow-500 text-center">Business Benefits</h2>
-    <div className="grid md:grid-cols-2 gap-10 items-start">
-      <ul className="list-disc list-inside text-neutral-300 text-lg space-y-4">
-        <li>
-          <strong className="text-white">Instant Contact Sharing:</strong> Impress clients and partners by exchanging contact info with a single tap—no more fumbling with paper cards.
-        </li>
-        <li>
-          <strong className="text-white">Customer Engagement:</strong> Lead potential customers directly to your landing pages, portfolios, or social links to drive action instantly.
-        </li>
-        <li>
-          <strong className="text-white">Operational Efficiency:</strong> Streamline introductions at events, expos, and meetings—saving time for your team and leaving a tech-savvy impression.
-        </li>
-        <li>
-          <strong className="text-white">Eco-Friendly Approach:</strong> Reinforce your brand’s commitment to sustainability by replacing traditional business cards with reusable NFC tech.
-        </li>
-        <li>
-          <strong className="text-white">Brand Modernization:</strong> Show that your company embraces cutting-edge tools, aligning with next-gen professional and digital culture.
-        </li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-
-      {/* How It Works */}
-      <section className="max-w-6xl mx-auto space-y-8 bg-neutral-700 p-8 rounded-xl" data-aos="fade-up">
-        <h2 className="text-4xl font-bold text-center text-yellow-500">How It Works</h2>
-        <div className="grid md:grid-cols-3 gap-8 text-center">
-          {[
-            { title: "Create Your TapTag", icon: "💳" },
-            { title: "Tap To Share", icon: "📱" },
-            { title: "Instant Connection", icon: "⚡" },
-          ].map((step, idx) => (
-            <div key={idx} className="bg-neutral-600 rounded-xl p-6 shadow-md hover:shadow-lg transition">
-              <div className="text-5xl mb-4">{step.icon}</div>
-              <h3 className="text-xl font-semibold text-yellow-400">{step.title}</h3>
-              <p className="text-neutral-300 mt-2">Effortless digital connection with a simple tap.</p>
-            </div>
-          ))}
+      {/* Why Choose TapTag */}
+      <section className="min-h-screen flex flex-col lg:flex-row items-center bg-black px-6 py-20">
+        <div
+          className="w-full lg:w-1/2 space-y-6 lg:pr-16 mb-12"
+          data-aos="fade-right"
+        >
+          <h2 className="text-4xl font-semibold text-[#D4AF37]">Why Choose TapTag</h2>
+          <ul className="text-neutral-300 space-y-3 text-base">
+            <li><strong className="text-white">✨ Instant Digital Exchange:</strong> Tap once to share instantly.</li>
+            <li><strong className="text-white">📎 Smart Engagement:</strong> Link to portfolios, socials, and services.</li>
+            <li><strong className="text-white">📲 Event Efficiency:</strong> Impress at expos and conferences.</li>
+            <li><strong className="text-white">♻️ Eco‑Friendly:</strong> One card, endless use. Sustainable & smart.</li>
+            <li><strong className="text-white">🛡️ Brand Modernization:</strong> A tech-forward first impression.</li>
+          </ul>
+        </div>
+        <div className="w-full lg:w-1/2" data-aos="fade-left">
+          <Image
+            src="/images/4.png"
+            alt="Business background"
+            width={800}
+            height={600}
+            className="rounded-2xl shadow-2xl"
+          />
         </div>
       </section>
 
-      {/* Modern Features */}
-     <section className="max-w-6xl mx-auto space-y-8" data-aos="fade-up">
-  <h2 className="text-4xl font-bold text-center text-yellow-500">Modern Features</h2>
-  <div className="grid md:grid-cols-3 gap-6">
-    {[
-      {
-        keyword: "tap",
-        title: "One-Tap Access",
-        description: "Share your contact or profile instantly by tapping your NFC card to any phone."
-      },
-      {
-        keyword: "share",
-        title: "Smart Sharing",
-        description: "Easily send links to portfolios, menus, or booking pages without apps or typing."
-      },
-      {
-        keyword: "contactless",
-        title: "Contactless & Secure",
-        description: "Stay safe with touch-free exchanges that protect both you and your audience."
-      }
-    ].map((feature, idx) => (
-      <div key={idx} className="rounded-xl overflow-hidden group shadow-md relative">
-        <Image
-          src={`/images/${feature.keyword}.png`}
-          alt={feature.keyword}
-          width={800}
-          height={500}
-          className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-500"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = `/images/${feature.keyword}.jpg`;
-          }}
-        />
-        <div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white p-4 space-y-1">
-          <p className="font-bold text-lg">{feature.title}</p>
-          <p className="text-sm">{feature.description}</p>
+      {/* Features */}
+      <section className="min-h-screen bg-[#0a0a0a] px-6 py-20">
+        <div className="max-w-6xl mx-auto text-center space-y-14" data-aos="fade-up">
+          <h2 className="text-4xl font-semibold text-[#D4AF37]">Modern Features</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {[
+              {
+                icon: "📱",
+                title: "One-Tap Access",
+                desc: "Instantly open your profile — no app needed.",
+              },
+              {
+                icon: "🌐",
+                title: "Smart Sharing",
+                desc: "Link to your business, socials, or booking pages.",
+              },
+              {
+                icon: "🔒",
+                title: "Secure & Private",
+                desc: "You control what’s shared, when and how.",
+              },
+            ].map((f, i) => (
+              <div key={i} className="bg-white/5 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/10 hover:border-[#D4AF37] transition">
+                <div className="text-4xl">{f.icon}</div>
+                <h3 className="mt-4 text-xl font-semibold text-[#D4AF37]">{f.title}</h3>
+                <p className="mt-2 text-neutral-300 text-sm">{f.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    ))}
-  </div>
-</section>
+      </section>
 
+      {/* Companies */}
+      {/* <section className="bg-black px-6 py-20">
+        <div className="max-w-6xl mx-auto text-center space-y-10" data-aos="fade-up">
+          <h2 className="text-4xl font-semibold text-[#D4AF37]">Trusted by Brands</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+            {[
+              { name: "Google", logo: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" },
+              { name: "Nike", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" },
+              { name: "San Miguel", logo: "https://e7.pngegg.com/pngimages/179/435/png-clipart-san-miguel-beer-san-miguel-brewery-red-horse-beer-beer-logo-shield-thumbnail.png" },
+              { name: "Amazon", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" },
+              { name: "Spotify", logo: "https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" },
+            ].map((company, i) => (
+              <div key={i} className="flex items-center justify-center h-20">
+                <img src={company.logo} alt={company.name} className="max-h-12 object-contain" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section> */}
 
-      {/* Review Carousel */}
-      <section className="max-w-3xl mx-auto text-center space-y-6 mt-20" data-aos="zoom-in">
-  <h2 className="text-3xl font-bold text-yellow-500">What People Are Saying</h2>
-  <div className="relative bg-neutral-700 p-6 rounded-xl shadow-lg">
-    <div className="flex flex-col items-center space-y-4 px-8 transition duration-500 ease-in-out">
-      <img
-        src={reviews[currentIndex].avatar}
-        alt={reviews[currentIndex].name}
-        className="w-16 h-16 rounded-full border-2 border-yellow-500 object-cover"
-      />
-      <p className="text-yellow-400 text-sm">{reviews[currentIndex].text}</p>
-      <p className="text-neutral-300 text-xs italic">- {reviews[currentIndex].name}</p>
-    </div>
-  </div>
-</section>
-
+      {/* Testimonials */}
+      <section className="min-h-screen bg-black relative flex items-center justify-center px-6 py-24">
+        <div className="absolute inset-0 z-0">
+          <Image src="/images/tap.png" alt="Customer using TapTag" fill className="object-cover opacity-10" />
+        </div>
+        <div className="relative z-10 bg-white/5 backdrop-blur-md border border-white/10 p-10 rounded-2xl shadow-[0_0_60px_rgba(212,175,55,0.15)] max-w-md text-center" data-aos="zoom-in">
+          <img src={reviews[ci].avatar} alt={reviews[ci].name} className="w-16 h-16 rounded-full border-2 border-[#D4AF37] mx-auto" />
+          <p className="mt-4 text-[#D4AF37] text-base">{reviews[ci].text}</p>
+          <p className="mt-2 text-neutral-300 italic text-sm">— {reviews[ci].name}</p>
+        </div>
+      </section>
     </main>
   );
 }

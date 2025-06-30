@@ -127,3 +127,20 @@
     overflow: visible !important;
   }
 }
+
+@keyframes fade-in-out {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in-out {
+  animation: fade-in-out 2s ease-in-out infinite;
+}
+
+body {
+  font-family: 'Playfair Display', serif;
+}

@@ -121,6 +121,8 @@ export default function PublicLayout({
       >
         {/* Header */}
         <header className="w-full bg-neutral-900 border-b border-neutral-700">
+          <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
+
           <nav className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
             <Link
               href="/"

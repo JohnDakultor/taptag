@@ -1,3 +1,4 @@
+
 // "use client";
 
 // import { useEffect, useState } from "react";
@@ -32,39 +33,28 @@
 
 //   const getIcon = (label: string) => {
 //     const lower = label.toLowerCase();
-
-//     if (lower.includes("phone") || lower.includes("call"))
-//       return <Phone size={16} />;
+//     if (lower.includes("phone") || lower.includes("call")) return <Phone size={16} />;
 //     if (lower.includes("email")) return <Mail size={16} />;
-//     if (lower.includes("sms") || lower.includes("message"))
-//       return <MessageSquareText size={16} />;
+//     if (lower.includes("sms") || lower.includes("message")) return <MessageSquareText size={16} />;
 //     return <LinkIcon size={16} />;
 //   };
 
 //   const getLinkHref = (label: string, value: string) => {
 //     const lower = label.toLowerCase();
-
-//     if (lower.includes("phone") || lower.includes("call")) {
-//       return `tel:${value}`;
-//     }
-//     if (lower.includes("email")) {
-//       return `mailto:${value}`;
-//     }
-//     if (lower.includes("sms") || lower.includes("message")) {
-//       return `sms:${value}`;
-//     }
-//     if (value.startsWith("http")) {
-//       return value;
-//     }
+//     if (lower.includes("phone") || lower.includes("call")) return `tel:${value}`;
+//     if (lower.includes("email")) return `mailto:${value}`;
+//     if (lower.includes("sms") || lower.includes("message")) return `sms:${value}`;
+//     if (value.startsWith("http")) return value;
 //     return `https://${value}`;
 //   };
 
 //   if (!portfolio) return <Loading message="fetching preview..." />;
+  
 
 //   return (
-//     <div className="min-h-screen px-4 py-8 sm:px-6 md:px-10">
+//     <div className="min-h-screen px-4 py-10 sm:px-6 md:px-10">
 //       <Card
-//         className="max-w-xl mx-auto shadow-md rounded-2xl"
+//         className="max-w-xl mx-auto backdrop-blur-lg bg-white/10 border border-white/20 shadow-2xl rounded-3xl transition-all duration-500"
 //         style={{
 //           backgroundColor: portfolio.backgroundColor || "#fff",
 //           color: portfolio.textColor || "#000",
@@ -72,7 +62,7 @@
 //         }}
 //       >
 //         <CardContent
-//           className="space-y-6 p-6 flex flex-col"
+//           className="space-y-6 p-8 flex flex-col min-w-0 overflow-hidden"
 //           style={{
 //             textAlign: portfolio.alignment,
 //             alignItems:
@@ -83,11 +73,12 @@
 //                 : "center",
 //           }}
 //         >
+//           {/* Avatar */}
 //           {portfolio.avatar && (
 //             <img
 //               src={portfolio.avatar}
 //               alt="Avatar"
-//               className="w-20 h-20 rounded-full"
+//               className="w-24 h-24 rounded-full ring-4 ring-white/20 shadow-md transition-transform hover:scale-105"
 //               style={{
 //                 margin:
 //                   portfolio.alignment === "left"
@@ -99,77 +90,81 @@
 //             />
 //           )}
 
-//           <h1 className="text-2xl font-bold">{portfolio.name}</h1>
+//           {/* Name */}
+//           <h1 className="text-3xl font-extrabold tracking-tight break-words">
+//             {portfolio.name}
+//           </h1>
 
-// <div
-//   className={`flex gap-4  ${
-//     portfolio.alignment === "left"
-//       ? "justify-start"
-//       : portfolio.alignment === "right"
-//       ? "justify-end"
-//       : "justify-center"
-//   }`}
-// >
-//   {links.map((link) => {
-//     const label = link.label.toLowerCase();
-//     const href = getLinkHref(link.label, link.value);
+//           {/* Icons */}
+//           <div
+//             className={`flex gap-4 ${
+//               portfolio.alignment === "left"
+//                 ? "justify-start"
+//                 : portfolio.alignment === "right"
+//                 ? "justify-end"
+//                 : "justify-center"
+//             }`}
+//           >
+//             {links.map((link) => {
+//               const label = link.label.toLowerCase();
+//               const href = getLinkHref(link.label, link.value);
 
-//     if (label.includes("phone") || label.includes("call")) {
-//       return (
-//         <a
-//           key={link.id}
-//           href={href}
-//           className="text-gray-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
-//         >
-//           <Phone size={15} />
-//         </a>
-//       );
-//     }
+//               if (label.includes("phone") || label.includes("call")) {
+//                 return (
+//                   <a
+//                     key={link.id}
+//                     href={href}
+//                     className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all text-inherit shadow-sm"
+//                   >
+//                     <Phone size={15} />
+//                   </a>
+//                 );
+//               }
 
-//     if (label.includes("email")) {
-//       return (
-//         <a
-//           key={link.id}
-//           href={href}
-//           className="text-gray-600 p-2 rounded-full bg-gray-100 hover:bg-gray-200"
-//         >
-//           <Mail size={15} />
-//         </a>
-//       );
-//     }
+//               if (label.includes("email")) {
+//                 return (
+//                   <a
+//                     key={link.id}
+//                     href={href}
+//                     className="p-2 rounded-full bg-white/20 hover:bg-white/30 transition-all text-inherit shadow-sm"
+//                   >
+//                     <Mail size={15} />
+//                   </a>
+//                 );
+//               }
 
-//     return null;
-//   })}
-// </div>
+//               return null;
+//             })}
+//           </div>
 
-//           <h2 className="text-lg">{portfolio.title}</h2>
-//           <p>{portfolio.bio}</p>
+//           {/* Title & Bio */}
+//           <h2 className="text-xl font-semibold break-words">{portfolio.title}</h2>
+//           <p className="leading-relaxed break-words whitespace-pre-wrap">{portfolio.bio}</p>
 
+//           {/* Contact Section */}
 //           {portfolio.showContact && links.length > 0 && (
-//             <div className="w-full" style={{ textAlign: portfolio.alignment }}>
-//               <h3 className="font-semibold mb-2">Contact</h3>
+//             <div className="w-full space-y-3" style={{ textAlign: portfolio.alignment }}>
+//               <h3 className="text-lg font-semibold break-words">Contact</h3>
 //               <ul className="space-y-2 text-sm">
 //                 {links
-//                   .filter(
-//                     (link) => link.type === "contact" || link.type === "social"
-//                   )
+//                   .filter((link) => link.type === "contact" || link.type === "social")
 //                   .map((link) => (
 //                     <li
 //                       key={link.id}
-//                       className={`inline-flex items-center gap-2 ${
+//                       className={`inline-flex items-center gap-2 w-full ${
 //                         portfolio.alignment === "left"
 //                           ? "justify-start"
 //                           : portfolio.alignment === "right"
 //                           ? "justify-end"
 //                           : "justify-center"
-//                       } w-full`}
+//                       }`}
 //                     >
 //                       {getIcon(link.label)}
 //                       <a
 //                         href={getLinkHref(link.label, link.value)}
 //                         target="_blank"
 //                         rel="noopener noreferrer"
-//                         className="underline hover:opacity-80 transition"
+//                         className="underline hover:opacity-80 transition break-words"
 //                       >
 //                         <strong>{link.label}:</strong> {link.value}
 //                       </a>
@@ -179,35 +174,35 @@
 //             </div>
 //           )}
 
+//           {/* Section Blocks */}
 //           {portfolio.skills && (
-//             <div className="w-full">
-//               <h3 className="font-semibold">Skills</h3>
-//               <p>{portfolio.skills}</p>
-//             </div>
+//             <SectionBlock title="Skills" content={portfolio.skills} />
 //           )}
 //           {portfolio.experience && (
-//             <div className="w-full">
-//               <h3 className="font-semibold">Experience</h3>
-//               <p>{portfolio.experience}</p>
-//             </div>
+//             <SectionBlock title="Experience" content={portfolio.experience} />
 //           )}
 //           {portfolio.education && (
-//             <div className="w-full">
-//               <h3 className="font-semibold">Education</h3>
-//               <p>{portfolio.education}</p>
-//             </div>
+//             <SectionBlock title="Education" content={portfolio.education} />
 //           )}
 //           {portfolio.projects && (
-//             <div className="w-full">
-//               <h3 className="font-semibold">Projects</h3>
-//               <p>{portfolio.projects}</p>
-//             </div>
+//             <SectionBlock title="Projects" content={portfolio.projects} />
 //           )}
 //         </CardContent>
 //       </Card>
 //     </div>
 //   );
 // }
+
+// function SectionBlock({ title, content }: { title: string; content: string }) {
+//   return (
+//     <div className="w-full p-4 bg-white/10 rounded-xl shadow-sm backdrop-blur-sm transition-all overflow-hidden">
+//       <h3 className="text-base font-semibold mb-2 break-words">{title}</h3>
+//       <p className="text-sm leading-relaxed break-words whitespace-pre-wrap">{content}</p>
+//     </div>
+//   );
+// }
+
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -218,13 +213,24 @@ import Loading from "@/components/ui/loading";
 export default function Preview() {
   const [portfolio, setPortfolio] = useState<any>(null);
   const [links, setLinks] = useState<any[]>([]);
+  const [timedOut, setTimedOut] = useState(false);
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const fetchPortfolio = async () => {
-      const res = await fetch("/api/preview");
-      if (res.ok) {
-        const data = await res.json();
-        setPortfolio(data);
+      timeoutId = setTimeout(() => setTimedOut(true), 20000);
+
+      try {
+        const res = await fetch("/api/preview");
+        if (res.ok) {
+          const data = await res.json();
+          clearTimeout(timeoutId);
+          setPortfolio(data);
+        }
+      } catch (err) {
+        clearTimeout(timeoutId);
+        console.error("Error fetching portfolio:", err);
       }
     };
 
@@ -238,6 +244,8 @@ export default function Preview() {
 
     fetchLinks();
     fetchPortfolio();
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   const getIcon = (label: string) => {
@@ -257,7 +265,17 @@ export default function Preview() {
     return `https://${value}`;
   };
 
-  if (!portfolio) return <Loading message="fetching preview..." />;
+  if (timedOut && !portfolio) {
+    return (
+      <div className="flex items-center justify-center min-h-screen text-yellow-400 font-medium">
+        You haven&apos;t created a portfolio yet.
+      </div>
+    );
+  }
+
+  if (!portfolio) {
+    return <Loading message="Fetching preview..." />;
+  }
 
   return (
     <div className="min-h-screen px-4 py-10 sm:px-6 md:px-10">
@@ -281,7 +299,6 @@ export default function Preview() {
                 : "center",
           }}
         >
-          {/* Avatar */}
           {portfolio.avatar && (
             <img
               src={portfolio.avatar}
@@ -298,12 +315,10 @@ export default function Preview() {
             />
           )}
 
-          {/* Name */}
           <h1 className="text-3xl font-extrabold tracking-tight break-words">
             {portfolio.name}
           </h1>
 
-          {/* Icons */}
           <div
             className={`flex gap-4 ${
               portfolio.alignment === "left"
@@ -345,11 +360,9 @@ export default function Preview() {
             })}
           </div>
 
-          {/* Title & Bio */}
           <h2 className="text-xl font-semibold break-words">{portfolio.title}</h2>
           <p className="leading-relaxed break-words whitespace-pre-wrap">{portfolio.bio}</p>
 
-          {/* Contact Section */}
           {portfolio.showContact && links.length > 0 && (
             <div className="w-full space-y-3" style={{ textAlign: portfolio.alignment }}>
               <h3 className="text-lg font-semibold break-words">Contact</h3>
@@ -382,7 +395,6 @@ export default function Preview() {
             </div>
           )}
 
-          {/* Section Blocks */}
           {portfolio.skills && (
             <SectionBlock title="Skills" content={portfolio.skills} />
           )}
